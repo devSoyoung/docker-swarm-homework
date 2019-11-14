@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - "./db:/var/lib/mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD='password123'
+      - MYSQL_DATABASE='toyproject_db'
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    ports:
+      - "3307:3306"
+  web:
+    image: csylee113/say-service:latest
+    depends_on:
+      - db
+    deploy:
+      replicas: 4
+      placement:
+        constraints: [node.role != manager]
+    ports:
+      - "80:3000"

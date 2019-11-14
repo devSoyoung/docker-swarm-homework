@@ -1,0 +1,46 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+* {
+  letter-spacing: -0.5px;
+}
+.container {
+  margin-top: 50px;
+}
+.title {
+  text-align: center;
+  font-weight: 800;
+}
+
+tr, th {
+  text-align: center;
+}
+
+.table {
+  margin-top: 30px;
+}
+
+.mybutton {
+  display: block;
+  margin-left: auto;
+}
