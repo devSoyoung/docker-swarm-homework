@@ -12,7 +12,7 @@ try {
     {
       'host': 'localhost', // 데이터베이스 호스트
       'dialect': 'mysql', // 사용할 데이터베이스 종류
-      'port': 3306,
+      'port': config.DB.port,
       retry: {
         match: [
           /SequelizeConnectionError/,

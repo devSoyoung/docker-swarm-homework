@@ -12,6 +12,7 @@ const config = {
       name: '',
       user: '',
       password: '',
+      port: 3306,
     },
   },
 };
