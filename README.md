@@ -35,7 +35,7 @@ $ docker container rm $(docker container ls -aq)
 ```
 
 ### Frontend
-프론트엔드 코드는 `frontend_server/frontend`에 있다. 여기서 `npm run build` 하면 빌드된 결과물이 `build` 폴더에 생긴다. 그걸 backend_server 폴더의 public 으로 옮겨야한다.
+프론트엔드 코드는 `frontend_server/frontend`에 있다. 여기서 `npm run build` 하면 빌드된 결과물이 `build` 폴더에 생긴다. 그걸 backend_server 폴더의 public 으로 옮겨야한다. 귀찮다..
 
 ### 이미지 빌드하고 Docker Hub에 올리기 
 ```
@@ -105,7 +105,7 @@ k6mj3fz2tchb10labqkcg0niz     worker1             Ready               Active    
 ```
 아래와 같이 swarm manager와 worker에 대한 정보를 확인할 수 있. 
 
-*> `*docker node*`*는 swarm manager에서만 실행할 수 있는 명령어이다. swarm manager가 아닌 worker1이나 worker2에서 해당 명령어를 실행하면 아래와 같이 에러가 발생함.
+> `docker node`는 swarm manager에서만 실행할 수 있는 명령어이다. swarm manager가 아닌 worker1이나 worker2에서 해당 명령어를 실행하면 아래와 같이 에러가 발생함.
 
 ```
 $ docker-machine ssh worker1 \
@@ -114,7 +114,6 @@ $ docker-machine ssh worker1 \
 Error response from daemon: This node is not a swarm manager. Worker nodes can't be used to view or modify cluster state. Please run this command on a manager node or promote the current node to a manager.
 exit status 1
 ```
-
 
 ***
 
@@ -133,8 +132,15 @@ $ docker-machine ssh manager docker service ps helloswarm
 $ docker-machine ssh manager docker service ps helloswarm_webserver
 ```
 
-## Release Node
-일단 manager 노드에서 `stack rm`으로 만들었던 서비스를 종료한다.
+## 결과 확인하기
+master 노드의 ip를 확인하고 브라우저에서 해당 ip의 80포트(브라우저 기본)로 접속하면 잘 뜬다.
+
+```
+$ docker-machine ip manager
+```
+
+## Release Node(종료하기)
+먼저 manager에서 `stack rm`으로 만들었던 서비스를 종료한다.
 ```
 $ docker-machine ssh manager docker stack rm helloswarm
 ```
@@ -149,14 +155,7 @@ $ docker-machine ssh worker1 docker swarm leave
 $ docker-machine ssh manager docker swarm leaver --force
 ```
 
-manager 노드를 해제 할 경우에는 --force 옵션을 주어야 함
-
-## 결과 확인하기
-master 노드의 ip를 확인하고 브라우저에서 해당 ip의 80포트(브라우저 기본)로 접속하면 잘 뜬다.
-
-```
-$ docker-machine ip manager
-```
+manager 노드를 해제 할 경우에는 --force 옵션을 주어야 한다.
 
 ***
 
